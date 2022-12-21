@@ -1,7 +1,7 @@
 const db = require('../models');
 const Comment = db.comments;
 
-//membuat komentar
+//membuat komentar(post)
 exports.buat = async (req, res) => {
        try {
               const {
@@ -45,6 +45,30 @@ exports.getComment = async (req, res) => {
            });
        }
    };
+
+ //get comment by id
+   exports.getCommentById = async (req, res) => {
+       try {
+           const { commentId } = req.params; 
+           const data = await Comment.findByPk(commentId);
+   
+           if (data) {
+               return res.status(200).json({
+                   data
+               });
+           } else {
+               return res.status(404).json({
+                   message: "Comment not found",
+               });
+           }
+       } catch (error) {
+           console.error(error);
+           return res.status(500).json({
+               message: error
+           });
+       }
+   };
+
 
 //update komentar
 exports.updateComment = async (req, res) => {

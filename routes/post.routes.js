@@ -1,5 +1,5 @@
 const { create, update, destroy, getAll, getById } = require('../controllers/post.controller');
-const { buat, getComment, updateComment, destroyComment } = require('../controllers/comment.controller');
+const { buat, getComment, getCommentById, updateComment, destroyComment } = require('../controllers/comment.controller');
 
 module.exports = app => {
     app.post('/api/posts', create);
@@ -9,6 +9,7 @@ module.exports = app => {
     app.get('/api/posts/:id', getById);
     app.post('/comment', buat);
     app.get('/comment', getComment);
+    app.get('/comment/:commentId', getCommentById);
     app.put('/comment/:commentId', updateComment);
     app.delete('/comment/:commentId', destroyComment);
 }
